@@ -93,8 +93,9 @@ void PhysVehicle3D::Render()
 	glass.transform.M[13] += offset5.getY();
 	glass.transform.M[14] += offset5.getZ();
 
-	const vec3 axis(1, 0, 0);
-	glass.transform.rotate(45,axis);
+	
+	//const vec3 axis(1, 0, 0);
+	//glass.transform.rotate(45, vehicle->getRightAxis());
 	
 
 

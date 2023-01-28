@@ -27,11 +27,11 @@ bool ModulePlayer::Start()
 	car.chassis2_size.Set(1.5f, 0.35f, 0.5f);
 	car.chassis2_offset.Set(0, 1, car.chassis_size.z / 2 + car.chassis2_size.z / 2);
 
-	car.cabin_size.Set(2,1.2f,1.5f);
-	car.cabin_offset.Set(0, car.chassis_offset.y+car.chassis_size.y/2 + car.cabin_size.y / 2, -1.25f);
+	/*car.cabin_size.Set(2,1.2f,1.5f);
+	car.cabin_offset.Set(0, car.chassis_offset.y+car.chassis_size.y/2 + car.cabin_size.y / 2, -1.25f);*/
 
-	//car.cabin_size.Set(1, 0.5f, 1.5f);
-	//car.cabin_offset.Set(0, car.chassis_offset.y + car.chassis_size.y / 2 + car.cabin_size.y / 2, 0);
+	car.cabin_size.Set(1, 0.5f, 1.5f);
+	car.cabin_offset.Set(0, car.chassis_offset.y + car.chassis_size.y / 2 + car.cabin_size.y / 2, 0);
 
 	car.front_size.Set(0.85f, 0.25f, 1);
 	car.front_offset.Set(car.chassis_offset.x, car.chassis_offset.y, car.chassis_size.z / 2 + car.chassis2_size.z + car.front_size.z / 2);
@@ -39,8 +39,8 @@ bool ModulePlayer::Start()
 	car.front_horitzontal_size.Set(2, 0.125f, 0.5f);
 	car.front_horitzontal_offset.Set(car.chassis_offset.x, car.chassis_offset.y, car.chassis_size.z / 2 + car.chassis2_size.z + car.front_size.z);
 
-	car.glass_size.Set(2, 0.25f, 1.75f);
-	car.glass_offset.Set(car.chassis_offset.x, 1.75f, 0);
+	/*car.glass_size.Set(2, 0.25f, 1.75f);
+	car.glass_offset.Set(car.chassis_offset.x, 1.75f, 0);*/
 
 	car.mass = 500.0f;
 	car.suspensionStiffness = 15.88f;
