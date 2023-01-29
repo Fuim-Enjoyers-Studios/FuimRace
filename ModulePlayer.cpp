@@ -116,7 +116,13 @@ bool ModulePlayer::Start()
 	car.wheels[3].steering = false;
 
 	vehicle = App->physics->AddVehicle(car);
-	vehicle->SetPos(0, 0, 0);
+	vehicle->ctype = ColliderType::PLAYER;
+	vec3 cam = App->scene_intro->checkpoints.at(0).data->GetPos();
+	float* pos = App->scene_intro->checkpoints.at(0).data->transform.M;
+	vehicle->SetTransform(pos);
+	vehicle->SetPos(cam.x, cam.y, cam.z);
+
+	lastCheckpoint = 0;
 	
 	return true;
 }
@@ -156,6 +162,9 @@ update_status ModulePlayer::Update(float dt)
 		brake = BRAKE_POWER;
 	}
 
+	if (vehicle->body->getCenterOfMassPosition().getY() < App->scene_intro->platOffset - 5) respawn = true;
+	if (respawn) Teleport(lastCheckpoint);
+
 	vehicle->ApplyEngineForce(acceleration);
 	vehicle->Turn(turn);
 	vehicle->Brake(brake);
@@ -168,6 +177,17 @@ update_status ModulePlayer::Update(float dt)
 	App->window->SetTitle(title);
 
 	return UPDATE_CONTINUE;
+}
+
+void ModulePlayer::Teleport(int num)
+{
+	respawn = false;
+	vehicle->body->setLinearVelocity({ 0,0,0 });
+	vehicle->body->setAngularVelocity({ 0,0,0 });
+	vec3 cam = App->scene_intro->checkpoints.at(num).data->GetPos();
+	float* pos = App->scene_intro->checkpoints.at(num).data->transform.M;
+	vehicle->SetTransform(pos);
+	vehicle->SetPos(cam.x, cam.y, cam.z);
 }
 
 

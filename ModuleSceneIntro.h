@@ -45,14 +45,11 @@ public:
 	PhysMotor3D* left_wheel;
 	PhysMotor3D* right_wheel;
 
-	//scenario
-	Cube ground;
-	float groundsize;
+	Plane* ground;
+	int platOffset;
 
-	p2List<Cube*> scenaryCubes;
-	p2List<Cylinder> scenaryCylinders;
-	p2List<Sphere> scenarySpheres;
-
-
-
+	p2List<Cube*> platforms;
+	p2List<PhysBody3D*> pbPlat;
+	p2List<PhysBody3D*> checkPlat;
+	p2List<Cube*> checkpoints;
 };

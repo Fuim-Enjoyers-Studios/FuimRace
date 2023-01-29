@@ -18,6 +18,7 @@ public:
 	bool Start();
 	update_status Update(float dt);
 	bool CleanUp();
+	void Teleport(int num);
 
 public:
 
@@ -25,4 +26,7 @@ public:
 	float turn;
 	float acceleration;
 	float brake;
+
+	bool respawn;
+	int lastCheckpoint;
 };

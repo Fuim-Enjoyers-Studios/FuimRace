@@ -6,10 +6,13 @@
 class btRigidBody;
 class Module;
 
-enum class Ctype
+enum class ColliderType
 {
-	NORMAL,
-	MUD,
+	PLAYER,
+	PLATFORM,
+	DEATH,
+	WIN,
+	CHECKPOINT,
 	UNKNOWN
 };
 
@@ -28,14 +31,14 @@ public:
 	void SetAsSensor(bool sensor);
 	bool GetIsSensor() { return isSensor; }
 
+	void isSensor();
 private:
 	bool isSensor;
 
 public:
 	btRigidBody* body = nullptr;
 	p2List<Module*> collision_listeners;
-
-	Ctype ctype;
+	ColliderType ctype;
 };
 
 #endif // __PhysBody3D_H__
