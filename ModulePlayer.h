@@ -54,6 +54,8 @@ private:
 
 	Color color;
 
+	//fx
+	unsigned int brakefx, deadfx, driftfx, enginefx;
 
 	float angle = -0.25;
 

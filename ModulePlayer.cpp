@@ -20,6 +20,14 @@ bool ModulePlayer::Start()
 {
 	LOG("Loading player");
 
+
+	//start
+	brakefx = App->audio->LoadFx("Assets/Audio/Fx/brake.wav");
+	deadfx = App->audio->LoadFx("Assets/Audio/Fx/dead.wav");
+	driftfx = App->audio->LoadFx("Assets/Audio/Fx/drift.wav");
+	enginefx = App->audio->LoadFx("Assets/Audio/Fx/engine.wav");
+
+
 	VehicleInfo car;
 
 	// Car properties ----------------------------------------
