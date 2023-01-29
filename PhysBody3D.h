@@ -6,6 +6,16 @@
 class btRigidBody;
 class Module;
 
+enum class ColliderType
+{
+	PLAYER,
+	PLATFORM,
+	DEATH,
+	WIN,
+	CHECKPOINT,
+	UNKNOWN
+};
+
 // =================================================
 struct PhysBody3D
 {
@@ -19,11 +29,12 @@ public:
 	void SetTransform(const float* matrix) const;
 	void SetPos(float x, float y, float z);
 
-private:
-	btRigidBody* body = nullptr;
+	void isSensor();
 
 public:
+	btRigidBody* body = nullptr;
 	p2List<Module*> collision_listeners;
+	ColliderType ctype;
 };
 
 #endif // __PhysBody3D_H__

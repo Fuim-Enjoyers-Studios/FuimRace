@@ -26,8 +26,10 @@ public:
 	void			Scale(float x, float y, float z);
 	PrimitiveTypes	GetType() const;
 
+	vec3			GetPos() { return position; }
+
 public:
-	
+	vec3 position;
 	Color color;
 	mat4x4 transform;
 	bool axis,wire;

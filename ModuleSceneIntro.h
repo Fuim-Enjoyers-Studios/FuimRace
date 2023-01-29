@@ -41,4 +41,12 @@ public:
 
 	PhysMotor3D* left_wheel;
 	PhysMotor3D* right_wheel;
+
+	Plane* ground;
+	int platOffset;
+
+	p2List<Cube*> platforms;
+	p2List<PhysBody3D*> pbPlat;
+	p2List<PhysBody3D*> checkPlat;
+	p2List<Cube*> checkpoints;
 };

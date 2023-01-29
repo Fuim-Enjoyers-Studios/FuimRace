@@ -3,8 +3,10 @@
 #include "Bullet/include/btBulletDynamicsCommon.h"
 
 // =================================================
-PhysBody3D::PhysBody3D(btRigidBody* body) : body(body)
-{}
+PhysBody3D::PhysBody3D(btRigidBody* body) : body(body), ctype(ColliderType::UNKNOWN)
+{
+	ctype = ColliderType::UNKNOWN;
+}
 
 // ---------------------------------------------------------
 PhysBody3D::~PhysBody3D()
@@ -44,4 +46,9 @@ void PhysBody3D::SetPos(float x, float y, float z)
 	btTransform t = body->getWorldTransform();
 	t.setOrigin(btVector3(x, y, z));
 	body->setWorldTransform(t);
+}
+
+void PhysBody3D::isSensor()
+{
+	body->setCollisionFlags(body->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
 }

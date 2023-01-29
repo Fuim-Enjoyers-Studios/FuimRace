@@ -116,6 +116,28 @@ public:
 		return ret;
 	}
 
+	p2List_item<tdata> at(unsigned int index) const
+	{
+		tdata data;
+		//bool ret = false;
+		unsigned int i = 0;
+		p2List_item<tdata>* p_data = start;
+
+		for (unsigned int i = 0; i < index && p_data != NULL; ++i)
+			p_data = p_data->next;
+
+		if (p_data != NULL)
+		{
+			data = p_data->data;
+		}
+		else
+		{
+			return NULL;
+		}
+
+		return data;
+	}
+
 	/**
 	* Deletes an item from the list
 	*/
