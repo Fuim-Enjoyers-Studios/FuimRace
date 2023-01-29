@@ -55,21 +55,21 @@ void ModulePlayground::CreatePlayground() {
 	Color Water = Blue;
 	Color Dirt(0.4, 0.2, 0.0);
 
-	CreateScenarioCube(vec3(10, 0.5f, 80), vec3(0, App->scene_intro->platOffset, 0));
+	CreateScenarioCube(vec3(10, 0.5f, 240), vec3(0, App->scene_intro->platOffset, 0));
 
-	CreateScenarioCube(vec3(11.5f, 0.5f, 21.2f), vec3(6.7f, App->scene_intro->platOffset,43.5f),45);
+	CreateScenarioCube(vec3(11.5f, 0.5f, 63.6f), vec3(6.7f, App->scene_intro->platOffset,43.5f),45);
 
-	CreateScenarioCube(vec3(10, 0.5f, 40), vec3(30, App->scene_intro->platOffset, 50),90);
+	CreateScenarioCube(vec3(10, 0.5f, 120), vec3(30, App->scene_intro->platOffset, 50),90);
 
-	CreateScenarioCube(vec3(11.5f, 0.5f, 21.2f), vec3(53.3f, App->scene_intro->platOffset, 43.5f), -45);
+	CreateScenarioCube(vec3(11.5f, 0.5f, 63.6f), vec3(53.3f, App->scene_intro->platOffset, 43.5f), -45);
 
-	CreateScenarioCube(vec3(10, 0.5f, 80), vec3(60, App->scene_intro->platOffset, 0));
+	CreateScenarioCube(vec3(10, 0.5f, 240), vec3(60, App->scene_intro->platOffset, 0));
 
-	CreateScenarioCube(vec3(11.5f, 0.5f, 21.2f), vec3(6.7f, App->scene_intro->platOffset, -43.5f), -45);
+	CreateScenarioCube(vec3(11.5f, 0.5f, 63.6f), vec3(6.7f, App->scene_intro->platOffset, -43.5f), -45);
 
-	CreateScenarioCube(vec3(10, 0.5f, 40), vec3(30, App->scene_intro->platOffset, -50), 90);
+	CreateScenarioCube(vec3(10, 0.5f, 120), vec3(30, App->scene_intro->platOffset, -50), 90);
 
-	CreateScenarioCube(vec3(11.5f, 0.5f, 21.2f), vec3(53.3f, App->scene_intro->platOffset, -43.5f), 45);
+	CreateScenarioCube(vec3(11.5f, 0.5f, 63.6f), vec3(53.3f, App->scene_intro->platOffset, -43.5f), 45);
 
 
 }

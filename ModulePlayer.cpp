@@ -51,7 +51,7 @@ bool ModulePlayer::Start()
 	float connection_height = 1.2f;
 	float wheel_radius = 0.6f;
 	float wheel_width = 1;
-	float suspensionRestLength = 0.6f;
+	float suspensionRestLength = 0.9f;
 
 	// Don't change anything below this line ------------------
 
