@@ -18,18 +18,8 @@ bool ModuleSceneIntro::Start()
 	bool ret = true;
 
 	Cube* cube;
-	PhysBody3D* temp;
 	platOffset = 100;
 
-	//CIRCUITO
-	/*{
-		cube = new Cube(100, 1, 15);
-		cube->SetPos(-90, platOffset, -86);
-		cube->color.Set(1, 1, 0.6);
-		platforms.add(cube);
-		pbPlat.add(App->physics->AddBody(*cube, 0));
-		checkPlat.add(pbPlat.getLast()->data);
-	}*/
 	//CHECKPOINTS
 	{
 		// Checkpoint Start 
@@ -37,15 +27,7 @@ bool ModuleSceneIntro::Start()
 		cube->SetPos(0, 10 + platOffset, 0);
 		cube->SetRotation(0, { 0,1,0 });
 		checkpoints.add(cube);
-		temp = App->physics->AddBody(*cube, 0);
-		temp->ctype = ColliderType::CHECKPOINT;
-		pbPlat.add(temp);
-		pbPlat.getLast()->data->isSensor();
 	}
-
-
-	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
-	App->camera->LookAt(vec3(0, 0, 0));
 	/*ground = new Plane(0, 1, 0, 0);
 	ground->axis = false;*/
 	return ret;
