@@ -33,11 +33,14 @@ void PhysBody3D::GetTransform(float* matrix) const
 // ---------------------------------------------------------
 void PhysBody3D::SetTransform(const float* matrix) const
 {
-	if(body != NULL && matrix != NULL)
+	if(body != NULL)
 	{
-		btTransform t;
-		t.setFromOpenGLMatrix(matrix);
-		body->setWorldTransform(t);
+		if (matrix != NULL)
+		{
+			btTransform t;
+			t.setFromOpenGLMatrix(matrix);
+			body->setWorldTransform(t);
+		}
 	}
 }
 
@@ -46,6 +49,20 @@ void PhysBody3D::SetPos(float x, float y, float z)
 {
 	btTransform t = body->getWorldTransform();
 	t.setOrigin(btVector3(x, y, z));
+	body->setWorldTransform(t);
+}
+
+void PhysBody3D::SetPos(const btVector3& pos)
+{
+	btTransform t = body->getWorldTransform();
+	t.setOrigin(pos);
+	body->setWorldTransform(t);
+}
+
+void PhysBody3D::SetPos(vec3& pos)
+{
+	btTransform t = body->getWorldTransform();
+	t.setOrigin(btVector3(pos.x, pos.y, pos.z));
 	body->setWorldTransform(t);
 }
 

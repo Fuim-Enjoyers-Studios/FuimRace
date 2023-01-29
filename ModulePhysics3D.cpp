@@ -17,7 +17,7 @@
 
 ModulePhysics3D::ModulePhysics3D(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
-
+	timeLessCollision = new Timer();
 	collision_conf = new btDefaultCollisionConfiguration();
 	dispatcher = new btCollisionDispatcher(collision_conf);
 	broad_phase = new btDbvtBroadphase();
@@ -54,55 +54,95 @@ bool ModulePhysics3D::Start()
 	world->setGravity(GRAVITY);
 	vehicle_raycaster = new btDefaultVehicleRaycaster(world);
 
-	// Big plane as ground
-	{
-		btCollisionShape* colShape = new btStaticPlaneShape(btVector3(0, 1, 0), 0);
+	//// Big plane as ground
+	//{
+	//	btCollisionShape* colShape = new btStaticPlaneShape(btVector3(0, 1, 0), 0);
 
-		btDefaultMotionState* myMotionState = new btDefaultMotionState();
-		btRigidBody::btRigidBodyConstructionInfo rbInfo(0.0f, myMotionState, colShape);
+	//	btDefaultMotionState* myMotionState = new btDefaultMotionState();
+	//	btRigidBody::btRigidBodyConstructionInfo rbInfo(0.0f, myMotionState, colShape);
 
-		btRigidBody* body = new btRigidBody(rbInfo);
-		world->addRigidBody(body);
-	}
+	//	btRigidBody* body = new btRigidBody(rbInfo);
+	//	world->addRigidBody(body);
+	//}
 
+	onCollision = false;
 	return true;
 }
 
 // ---------------------------------------------------------
 update_status ModulePhysics3D::PreUpdate(float dt)
 {
-	world->stepSimulation(dt, 15);
+	//Ground check
+	if (timeLessCollision->Read() > 500)
+	{
+		App->player->vehicle->state = State::IN_AIR;
+	}
 
+	world->stepSimulation(dt, 15);
 	int numManifolds = world->getDispatcher()->getNumManifolds();
-	for(int i = 0; i<numManifolds; i++)
+	for (int i = 0; i < numManifolds; i++)
 	{
 		btPersistentManifold* contactManifold = world->getDispatcher()->getManifoldByIndexInternal(i);
 		btCollisionObject* obA = (btCollisionObject*)(contactManifold->getBody0());
 		btCollisionObject* obB = (btCollisionObject*)(contactManifold->getBody1());
 
 		int numContacts = contactManifold->getNumContacts();
-		if(numContacts > 0)
+
+		onCollision = false;
+		if (numContacts > 0)
 		{
+			timeLessCollision->Start();
+
+			// Collisions check
 			PhysBody3D* pbodyA = (PhysBody3D*)obA->getUserPointer();
 			PhysBody3D* pbodyB = (PhysBody3D*)obB->getUserPointer();
-
-			if(pbodyA && pbodyB)
+			if (pbodyA != NULL && pbodyB != NULL)
 			{
-				p2List_item<Module*>* item = pbodyA->collision_listeners.getFirst();
-				while(item)
+				PhysBody3D* vehicle = App->player->vehicle;
+				PhysBody3D* bodySen = App->player->bodySensor;
+				PhysBody3D* sensorV = App->player->vehicleSensor;
+
+				if (pbodyA != bodySen && pbodyB != bodySen)
 				{
-					item->data->OnCollision(pbodyA, pbodyB);
-					item = item->next;
+					if (!(pbodyA == sensorV && pbodyB == vehicle) && !(pbodyA == vehicle && pbodyB == sensorV))
+					{
+						if (App->player->vehicle->state == State::IN_AIR)App->player->vehicle->state = State::IDLE;
+					}
+				}
+				else
+				{
+					App->player->vehicle->state = State::IN_AIR;
+
 				}
 
-				item = pbodyB->collision_listeners.getFirst();
-				while(item)
+
+
+				if (pbodyA && pbodyB)
 				{
-					item->data->OnCollision(pbodyB, pbodyA);
-					item = item->next;
+					onCollision = true;
+					p2List_item<Module*>* item = pbodyA->collision_listeners.getFirst();
+					while (item)
+					{
+						item->data->OnCollision(pbodyA, pbodyB);
+						item = item->next;
+					}
+
+					item = pbodyB->collision_listeners.getFirst();
+					while (item)
+					{
+						item->data->OnCollision(pbodyB, pbodyA);
+						item = item->next;
+					}
 				}
 			}
+			else
+			{
+				if (App->player->vehicle->state == State::IN_AIR)App->player->vehicle->state = State::IDLE;
+			}
 		}
+
+
+
 	}
 
 	return UPDATE_CONTINUE;

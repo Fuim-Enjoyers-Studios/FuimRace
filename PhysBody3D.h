@@ -2,7 +2,8 @@
 #define __PhysBody3D_H__
 
 #include "p2List.h"
-
+#include "Bullet/include/LinearMath/btVector3.h"
+#include "glmath.h"
 class btRigidBody;
 class Module;
 
@@ -30,6 +31,8 @@ public:
 	void GetTransform(float* matrix) const;
 	void SetTransform(const float* matrix) const;
 	void SetPos(float x, float y, float z);
+	void SetPos(const btVector3& pos);
+	void SetPos(vec3& pos);
 	void SetAsSensor(bool sensor);
 	bool GetIsSensor() { return sensor; }
 

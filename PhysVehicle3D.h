@@ -2,9 +2,16 @@
 
 #include "PhysBody3D.h"
 #include "glmath.h"
-
+#include "Color.h"
 class btRaycastVehicle;
 struct PhysBody3D;
+enum State
+{
+	IDLE = 1,
+	WALK,
+	TURBO,
+	IN_AIR,
+};
 
 struct Wheel
 {
@@ -42,6 +49,9 @@ struct VehicleInfo
 	vec3 aleron2_size;
 	vec3 aleron2_offset;
 
+	vec3 sensor_size;
+	vec3 sensor_offset;
+
 	float mass;
 	float suspensionStiffness; // default to 5.88 / 10.0 offroad / 50.0 sports car / 200.0 F1 car
 	float suspensionCompression; // default to 0.83
@@ -66,8 +76,11 @@ public:
 	void Brake(float force);
 	void Turn(float degrees);
 	float GetKmh() const;
+	Color GetColor() { return color; }
+	void SetColor(Color pColor) { color = pColor; }
 public:
-
+	Color color;
 	VehicleInfo info;
 	btRaycastVehicle* vehicle;
+	State state;
 };

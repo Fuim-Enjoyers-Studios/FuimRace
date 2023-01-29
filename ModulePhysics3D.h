@@ -39,13 +39,16 @@ public:
 
 
 private:
-
+	bool onCollision;
 	btDefaultCollisionConfiguration*	collision_conf;
 	btCollisionDispatcher*				dispatcher;
 	btBroadphaseInterface*				broad_phase;
 	btSequentialImpulseConstraintSolver* solver;
 	btDefaultVehicleRaycaster*			vehicle_raycaster;
 	DebugDrawer*						debug_draw;
+
+	Timer* timeLessCollision;
+	p2List<PhysBody3D*>* platformChecker;
 
 	p2List<btCollisionShape*> shapes;
 	p2List<PhysBody3D*> bodies;

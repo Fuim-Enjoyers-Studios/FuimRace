@@ -19,14 +19,42 @@ public:
 	update_status Update(float dt);
 	bool CleanUp();
 	void Teleport(int num);
+	void AssistDirection(float hardness);
 
 public:
 
 	PhysVehicle3D* vehicle;
+	PhysVehicle3D* vehicleSensor;
+
 	float turn;
 	float acceleration;
 	float brake;
 
 	bool respawn;
 	int lastCheckpoint;
+	Cube cubeSensor;
+	PhysBody3D* bodySensor;
+
+private:
+
+	btVector3 forwardVector;
+	btVector3 perpendicularVector;
+
+	int velocity;
+	float assistDirection;
+	float calc;
+	float floorOffset;
+	btVector3 positionCM;
+
+	//Gameplay conditioners
+
+	bool CPactive = false;
+	bool falling = false;
+	//Apearence
+
+	Color color;
+
+
+	float angle = -0.25;
+
 };
