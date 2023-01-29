@@ -38,6 +38,8 @@ update_status ModuleSceneIntro::Update(float dt)
 	p.axis = true;
 	p.Render();
 
+	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)App->SetDebug();
+
 	return UPDATE_CONTINUE;
 }
 

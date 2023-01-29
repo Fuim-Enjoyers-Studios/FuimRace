@@ -37,8 +37,6 @@ public:
 
 private:
 
-	bool debug;
-
 	btDefaultCollisionConfiguration*	collision_conf;
 	btCollisionDispatcher*				dispatcher;
 	btBroadphaseInterface*				broad_phase;

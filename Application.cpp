@@ -131,3 +131,11 @@ void Application::AddModule(Module* mod)
 {
 	list_modules.add(mod);
 }
+
+bool Application::GetDebug() {
+	return debug;
+}
+
+void Application::SetDebug() {
+	debug = !debug;
+}

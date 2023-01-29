@@ -38,10 +38,13 @@ public:
 
 	bool Init();
 	update_status Update();
+	bool GetDebug();
+	void SetDebug();
 	bool CleanUp();
 
 private:
 
+	bool debug = false;
 	void AddModule(Module* mod);
 	void PrepareUpdate();
 	void FinishUpdate();
