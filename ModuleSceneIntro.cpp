@@ -20,7 +20,7 @@ bool ModuleSceneIntro::Start()
 	Cube* cube;
 	platOffset = 100;
 	
-	App->audio->PlayMusic("Assets/Audio/TheGrefg_Victory.ogg");
+	App->audio->PlayMusic("Assets/Audio/TheGrefg_Victory.wav");
 
 	//CHECKPOINTS
 	{
