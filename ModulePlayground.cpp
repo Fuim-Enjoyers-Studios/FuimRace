@@ -55,26 +55,39 @@ void ModulePlayground::CreatePlayground() {
 	Color Water = Blue;
 	Color Dirt(0.4, 0.2, 0.0);
 
-	CreateScenarioCube(vec3(10, 0.5f, 240), vec3(0, App->scene_intro->platOffset, 0));
+	//big lap
+	CreateScenarioCube(vec3(20, 0.5f, 240), vec3(0, App->scene_intro->platOffset, 0), 0,ColliderType::ICE, Color(0, 0, 255, 0));
 
-	CreateScenarioCube(vec3(11.5f, 0.5f, 63.6f), vec3(6.7f, App->scene_intro->platOffset,43.5f),45);
+	CreateScenarioCube(vec3(23, 0.5f, 63.6f), vec3(20.5f, App->scene_intro->platOffset,134),45);
 
-	CreateScenarioCube(vec3(10, 0.5f, 120), vec3(30, App->scene_intro->platOffset, 50),90);
+	CreateScenarioCube(vec3(20, 0.5f, 220), vec3(45, App->scene_intro->platOffset, 155),90);
 
-	CreateScenarioCube(vec3(11.5f, 0.5f, 63.6f), vec3(53.3f, App->scene_intro->platOffset, 43.5f), -45);
+	CreateScenarioCube(vec3(23, 0.5f, 63.6f), vec3(169.5f, App->scene_intro->platOffset, 134), -45);
 
-	CreateScenarioCube(vec3(10, 0.5f, 240), vec3(60, App->scene_intro->platOffset, 0));
+	CreateScenarioCube(vec3(20, 0.5f, 240), vec3(190, App->scene_intro->platOffset, 0));
 
-	CreateScenarioCube(vec3(11.5f, 0.5f, 63.6f), vec3(6.7f, App->scene_intro->platOffset, -43.5f), -45);
+	CreateScenarioCube(vec3(23, 0.5f, 63.6f), vec3(20.5f, App->scene_intro->platOffset, -134), -45);
 
-	CreateScenarioCube(vec3(10, 0.5f, 120), vec3(30, App->scene_intro->platOffset, -50), 90);
+	CreateScenarioCube(vec3(20, 0.5f, 220), vec3(45, App->scene_intro->platOffset, -155), 90);
 
-	CreateScenarioCube(vec3(11.5f, 0.5f, 63.6f), vec3(53.3f, App->scene_intro->platOffset, -43.5f), 45);
+	CreateScenarioCube(vec3(23, 0.5f, 63.6f), vec3(169.5f, App->scene_intro->platOffset, -134), 45);
+
+	//small lap
+	CreateScenarioCube(vec3(20, 0.5f, 240), vec3(-100, App->scene_intro->platOffset, 0), 0);
+
+	CreateScenarioCube(vec3(23, 0.5f, 63.6f), vec3(-79.5f, App->scene_intro->platOffset, 134), 45);
+
+	CreateScenarioCube(vec3(23, 0.5f, 63.6f), vec3(-79.5f, App->scene_intro->platOffset, -134), -45);
+
+	CreateScenarioCube(vec3(23, 0.5f, 63.6f), vec3(20.5f, App->scene_intro->platOffset, 134), 45);
+
+
+
 
 
 }
 
-void ModulePlayground::CreateScenarioCube(vec3 size, vec3 pos, float angle, Color color, ColliderType ctype, bool sensor) {
+void ModulePlayground::CreateScenarioCube(vec3 size, vec3 pos, float angle, ColliderType ctype, Color color,  bool sensor) {
 
 	Cube* cube = new Cube(size.x, size.y, size.z);
 

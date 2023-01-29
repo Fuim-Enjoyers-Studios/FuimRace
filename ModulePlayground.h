@@ -19,7 +19,7 @@ public:
 	void OnCollision(PhysBody3D* body1, PhysBody3D* body2);
 
 public:
-	void CreateScenarioCube(vec3 size, vec3 pos, float angle = 0.0f, Color color = Color(1, 1, 1, 1), ColliderType ctype = ColliderType::UNKNOWN, bool sensor = false);
+	void CreateScenarioCube(vec3 size, vec3 pos, float angle = 0.0f, ColliderType ctype = ColliderType::UNKNOWN, Color color = Color(1, 1, 1, 1),  bool sensor = false);
 
 	void CreatePlayground();
 
