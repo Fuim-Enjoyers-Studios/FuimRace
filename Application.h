@@ -46,7 +46,7 @@ public:
 
 private:
 
-	bool debug = true;
+	bool debug = false;
 	void AddModule(Module* mod);
 	void PrepareUpdate();
 	void FinishUpdate();

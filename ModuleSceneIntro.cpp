@@ -35,7 +35,7 @@ bool ModuleSceneIntro::Start()
 		// Checkpoint Start 
 		cube = new Cube(1, 1, 1);
 		cube->SetPos(0, 10 + platOffset, 0);
-		cube->SetRotation(90, { 0,1,0 });
+		cube->SetRotation(0, { 0,1,0 });
 		checkpoints.add(cube);
 		temp = App->physics->AddBody(*cube, 0);
 		temp->ctype = ColliderType::CHECKPOINT;
@@ -62,9 +62,9 @@ bool ModuleSceneIntro::CleanUp()
 // Update
 update_status ModuleSceneIntro::Update(float dt)
 {
-	/*Plane p(0, 1, 0, 0);
+	Plane p(0, 1, 0, 0);
 	p.axis = true;
-	p.Render();*/
+	p.Render();
 
 
 
