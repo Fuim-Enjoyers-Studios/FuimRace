@@ -200,7 +200,7 @@ update_status ModulePlayer::Update(float dt)
 	vehicleSensor->SetTransform(pos);
 
 	if (vehicle->body->getCenterOfMassPosition().getY() < App->scene_intro->platOffset - 10) respawn = true;
-	if (respawn) Teleport(lastCheckpoint);
+	CheckPoints();
 
 	/*if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 	{
@@ -366,6 +366,14 @@ void ModulePlayer::AssistDirection(float hardness)
 		assistDirection = calc * DEGTORAD;
 	else assistDirection = (turnDegrees - 5) * DEGTORAD;
 
+}
+
+void ModulePlayer::CheckPoints()
+{
+	if (respawn) Teleport(lastCheckpoint);
+	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN) Teleport(0);
+	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN) Teleport(1);
+	if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN) Teleport(2);
 }
 
 

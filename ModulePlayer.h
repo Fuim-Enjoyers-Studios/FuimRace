@@ -20,6 +20,7 @@ public:
 	bool CleanUp();
 	void Teleport(int num);
 	void AssistDirection(float hardness);
+	void CheckPoints();
 
 public:
 

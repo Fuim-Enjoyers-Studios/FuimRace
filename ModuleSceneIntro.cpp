@@ -24,7 +24,19 @@ bool ModuleSceneIntro::Start()
 	{
 		// Checkpoint Start 
 		cube = new Cube(1, 1, 1);
-		cube->SetPos(0, 10 + platOffset, 0);
+		cube->SetPos(190, 5 + platOffset, 0);
+		cube->SetRotation(0, { 0,1,0 });
+		checkpoints.add(cube);
+
+		// Checkpoint Start 
+		cube = new Cube(1, 1, 1);
+		cube->SetPos(40, 5 + platOffset, 150);
+		cube->SetRotation(0, { 0,1,0 });
+		checkpoints.add(cube);
+
+		// Checkpoint Start 
+		cube = new Cube(1, 1, 1);
+		cube->SetPos(40, 5 + platOffset, -150);
 		cube->SetRotation(0, { 0,1,0 });
 		checkpoints.add(cube);
 	}
