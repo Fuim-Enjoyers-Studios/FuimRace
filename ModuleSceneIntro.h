@@ -5,6 +5,9 @@
 #include "Primitive.h"
 
 #define MAX_SNAKE 2
+#define INIT_POSX 0
+#define INIT_POSY 30
+#define INIT_POSZ 0
 
 struct PhysBody3D;
 struct PhysMotor3D;
@@ -41,4 +44,15 @@ public:
 
 	PhysMotor3D* left_wheel;
 	PhysMotor3D* right_wheel;
+
+	//scenario
+	Cube ground;
+	float groundsize;
+
+	p2List<Cube*> scenaryCubes;
+	p2List<Cylinder> scenaryCylinders;
+	p2List<Sphere> scenarySpheres;
+
+
+
 };

@@ -11,6 +11,7 @@
 #include "ModuleRenderer3D.h"
 #include "ModuleCamera3D.h"
 #include "ModulePhysics3D.h"
+#include "ModulePlayground.h"
 #include "ModulePlayer.h"
 
 class Application
@@ -20,6 +21,7 @@ public:
 	ModuleInput* input;
 	ModuleAudio* audio;
 	ModuleSceneIntro* scene_intro;
+	ModulePlayground* playground;
 	ModuleRenderer3D* renderer3D;
 	ModuleCamera3D* camera;
 	ModulePhysics3D* physics;
@@ -44,7 +46,7 @@ public:
 
 private:
 
-	bool debug = false;
+	bool debug = true;
 	void AddModule(Module* mod);
 	void PrepareUpdate();
 	void FinishUpdate();

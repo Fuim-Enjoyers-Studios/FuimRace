@@ -6,6 +6,13 @@
 class btRigidBody;
 class Module;
 
+enum class Ctype
+{
+	NORMAL,
+	MUD,
+	UNKNOWN
+};
+
 // =================================================
 struct PhysBody3D
 {
@@ -18,12 +25,17 @@ public:
 	void GetTransform(float* matrix) const;
 	void SetTransform(const float* matrix) const;
 	void SetPos(float x, float y, float z);
+	void SetAsSensor(bool sensor);
+	bool GetIsSensor() { return isSensor; }
 
 private:
-	btRigidBody* body = nullptr;
+	bool isSensor;
 
 public:
+	btRigidBody* body = nullptr;
 	p2List<Module*> collision_listeners;
+
+	Ctype ctype;
 };
 
 #endif // __PhysBody3D_H__
