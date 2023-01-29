@@ -29,6 +29,10 @@ This is a University class project of Physics II. We have to build a racing car 
 - {Right - camera right}
 - {Drag right mouse button - change camera orientation}
 - {Esc - Close App}
+- {1 - Tp to checkpoint 1}
+- {2 - Tp to checkpoint 2}
+- {3 - Tp to checkpoint 3}
+- {4 - Tp to checkpoint 4}
 
 ## Developers
 
