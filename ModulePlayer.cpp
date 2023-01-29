@@ -259,6 +259,10 @@ update_status ModulePlayer::Update(float dt)
 
 	}
 
+	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN)
+	{
+		App->audio->PlayFx(enginefx);
+	}
 	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 	{
 		if (vehicle->state != State::TURBO && vehicle->state != State::IN_AIR)vehicle->state = State::WALK;
@@ -281,6 +285,10 @@ update_status ModulePlayer::Update(float dt)
 
 	if (!slippery)
 	{
+		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN)
+		{
+			App->audio->PlayFx(brakefx);
+		}
 		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 		{
 			if (vehicle->state != State::TURBO && vehicle->state != State::IN_AIR)vehicle->state = State::WALK;
@@ -298,7 +306,13 @@ update_status ModulePlayer::Update(float dt)
 			}
 		}
 	}
-
+	if (slippery)
+	{
+		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_DOWN || App->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN || App->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
+		{
+			App->audio->PlayFx(driftfx);
+		}
+	}
 	
 
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
