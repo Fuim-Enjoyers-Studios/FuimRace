@@ -29,11 +29,11 @@ public:
 	void SetTransform(const float* matrix) const;
 	void SetPos(float x, float y, float z);
 	void SetAsSensor(bool sensor);
-	bool GetIsSensor() { return isSensor; }
+	bool GetIsSensor() { return sensor; }
 
 	void isSensor();
 private:
-	bool isSensor;
+	bool sensor;
 
 public:
 	btRigidBody* body = nullptr;

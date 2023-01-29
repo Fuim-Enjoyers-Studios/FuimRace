@@ -9,8 +9,6 @@ PhysBody3D::PhysBody3D(btRigidBody* body) : body(body), ctype(ColliderType::UNKN
 }
 
 
-}
-
 // ---------------------------------------------------------
 PhysBody3D::~PhysBody3D()
 {
@@ -58,9 +56,9 @@ void PhysBody3D::isSensor()
 
 void PhysBody3D::SetAsSensor(bool value)
 {
-	if (this->isSensor != value)
+	if (this->sensor != value)
 	{
-		this->isSensor = value;
+		this->sensor = value;
 		if (value == true)
 			body->setCollisionFlags(body->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
 		else

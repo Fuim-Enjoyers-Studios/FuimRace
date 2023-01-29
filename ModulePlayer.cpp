@@ -162,7 +162,7 @@ update_status ModulePlayer::Update(float dt)
 		brake = BRAKE_POWER;
 	}
 
-	if (vehicle->body->getCenterOfMassPosition().getY() < App->scene_intro->platOffset - 5) respawn = true;
+	if (vehicle->body->getCenterOfMassPosition().getY() < App->scene_intro->platOffset - 10) respawn = true;
 	if (respawn) Teleport(lastCheckpoint);
 
 	vehicle->ApplyEngineForce(acceleration);

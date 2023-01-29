@@ -19,22 +19,22 @@ bool ModuleSceneIntro::Start()
 
 	Cube* cube;
 	PhysBody3D* temp;
-	platOffset = 10;
+	platOffset = 100;
 
 	//CIRCUITO
-	{
+	/*{
 		cube = new Cube(100, 1, 15);
 		cube->SetPos(-90, platOffset, -86);
 		cube->color.Set(1, 1, 0.6);
 		platforms.add(cube);
 		pbPlat.add(App->physics->AddBody(*cube, 0));
 		checkPlat.add(pbPlat.getLast()->data);
-	}
+	}*/
 	//CHECKPOINTS
 	{
 		// Checkpoint Start 
 		cube = new Cube(1, 1, 1);
-		cube->SetPos(-110, 10 + platOffset, -86);
+		cube->SetPos(0, 10 + platOffset, 0);
 		cube->SetRotation(90, { 0,1,0 });
 		checkpoints.add(cube);
 		temp = App->physics->AddBody(*cube, 0);

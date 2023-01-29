@@ -55,26 +55,26 @@ void ModulePlayground::CreatePlayground() {
 	Color Water = Blue;
 	Color Dirt(0.4, 0.2, 0.0);
 
-	CreateScenarioCube(vec3(10, 0.5f, 80), vec3(0, 0, 0));
+	CreateScenarioCube(vec3(10, 0.5f, 80), vec3(0, App->scene_intro->platOffset, 0));
 
-	CreateScenarioCube(vec3(11.5f, 0.5f, 21.2f), vec3(6.7f, 0,43.5f),45);
+	CreateScenarioCube(vec3(11.5f, 0.5f, 21.2f), vec3(6.7f, App->scene_intro->platOffset,43.5f),45);
 
-	CreateScenarioCube(vec3(10, 0.5f, 40), vec3(30, 0, 50),90);
+	CreateScenarioCube(vec3(10, 0.5f, 40), vec3(30, App->scene_intro->platOffset, 50),90);
 
-	CreateScenarioCube(vec3(11.5f, 0.5f, 21.2f), vec3(53.3f, 0, 43.5f), -45);
+	CreateScenarioCube(vec3(11.5f, 0.5f, 21.2f), vec3(53.3f, App->scene_intro->platOffset, 43.5f), -45);
 
-	CreateScenarioCube(vec3(10, 0.5f, 80), vec3(60, 0, 0));
+	CreateScenarioCube(vec3(10, 0.5f, 80), vec3(60, App->scene_intro->platOffset, 0));
 
-	CreateScenarioCube(vec3(11.5f, 0.5f, 21.2f), vec3(6.7f, 0, -43.5f), -45);
+	CreateScenarioCube(vec3(11.5f, 0.5f, 21.2f), vec3(6.7f, App->scene_intro->platOffset, -43.5f), -45);
 
-	CreateScenarioCube(vec3(10, 0.5f, 40), vec3(30, 0, -50), 90);
+	CreateScenarioCube(vec3(10, 0.5f, 40), vec3(30, App->scene_intro->platOffset, -50), 90);
 
-	CreateScenarioCube(vec3(11.5f, 0.5f, 21.2f), vec3(53.3f, 0, -43.5f), 45);
+	CreateScenarioCube(vec3(11.5f, 0.5f, 21.2f), vec3(53.3f, App->scene_intro->platOffset, -43.5f), 45);
 
 
 }
 
-void ModulePlayground::CreateScenarioCube(vec3 size, vec3 pos, float angle, Color color, Ctype ctype) {
+void ModulePlayground::CreateScenarioCube(vec3 size, vec3 pos, float angle, Color color, ColliderType ctype, bool sensor) {
 
 	Cube* cube = new Cube(size.x, size.y, size.z);
 
@@ -84,10 +84,19 @@ void ModulePlayground::CreateScenarioCube(vec3 size, vec3 pos, float angle, Colo
 	PhysBody3D* PhysBody = App->physics->AddBody(*cube, 0);
 	PhysBody->SetPos(pos.x, pos.y, pos.z);
 	PhysBody->ctype = ctype;	
-
+	if (sensor) {
+		PhysBody->SetAsSensor(true);
+	}
 	PhysBody->SetTransform(cube->transform.M);
 
 	cube->color.Set(color.r, color.g, color.b, color.a);
 
 	scenaryCubes.add(cube);
+
+	if (ctype == ColliderType::CHECKPOINT) {
+		App->scene_intro->checkPlat.add(PhysBody);
+	}
+
+	
+
 }
