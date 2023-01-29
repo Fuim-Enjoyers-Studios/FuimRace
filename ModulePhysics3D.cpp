@@ -121,6 +121,41 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 					App->player->slippery = true;
 				}
 
+				platformChecker = &App->scene_intro->checkPlat;
+				// Guarda el ultimo check Point tocado 
+				for (size_t i = 0; i < platformChecker->count(); i++)
+				{
+					if (pbodyA == platformChecker->at(i).data || pbodyB == platformChecker->at(i).data)
+						App->player->lastCheckpoint = i;
+				}
+
+				platformChecker = &App->scene_intro->checkIce;
+				// Guarda el ultimo check Point tocado 
+				for (size_t i = 0; i < platformChecker->count(); i++)
+				{
+					if (pbodyA == platformChecker->at(i).data || pbodyB == platformChecker->at(i).data)
+						App->player->slippery = true;
+				}
+
+				platformChecker = &App->scene_intro->checkGrass;
+				// Guarda el ultimo check Point tocado 
+				for (size_t i = 0; i < platformChecker->count(); i++)
+				{
+					if (pbodyA == platformChecker->at(i).data || pbodyB == platformChecker->at(i).data)
+						App->player->drag = true;
+				}
+
+				platformChecker = &App->scene_intro->checkPlatf;
+				// Guarda el ultimo check Point tocado 
+				for (size_t i = 0; i < platformChecker->count(); i++)
+				{
+					if (pbodyA == platformChecker->at(i).data || pbodyB == platformChecker->at(i).data)
+					{
+						App->player->drag = false;
+						App->player->slippery = false;
+					}
+				}
+
 
 
 				if (pbodyA && pbodyB)

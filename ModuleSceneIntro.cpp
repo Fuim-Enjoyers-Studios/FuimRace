@@ -39,6 +39,12 @@ bool ModuleSceneIntro::Start()
 		cube->SetPos(40, 5 + platOffset, -150);
 		cube->SetRotation(0, { 0,1,0 });
 		checkpoints.add(cube);
+
+		// Checkpoint Start 
+		cube = new Cube(1, 1, 1);
+		cube->SetPos(170, 5 + platOffset, -140);
+		cube->SetRotation(0, { 0,1,0 });
+		checkpoints.add(cube);
 	}
 	/*ground = new Plane(0, 1, 0, 0);
 	ground->axis = false;*/

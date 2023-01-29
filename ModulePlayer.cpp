@@ -162,6 +162,7 @@ bool ModulePlayer::Start()
 	lastCheckpoint = 0;
 	slippery = false;
 	drag = false;
+	win = false;
 	
 	return true;
 }
@@ -182,7 +183,7 @@ update_status ModulePlayer::Update(float dt)
 	turn = acceleration = brake = 0.0f;
 	AssistDirection(90.0f);
 
-
+	
 	vehicle->vehicle->getChassisWorldTransform();
 
 	btQuaternion q = vehicle->vehicle->getChassisWorldTransform().getRotation();
@@ -239,23 +240,23 @@ update_status ModulePlayer::Update(float dt)
 
 	perpendicularVector = { -forwardVector.getZ(), forwardVector.getY(), forwardVector.getX() };
 
-
-	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT &&
-		(vehicle->state != State::IN_AIR || vehicle->state == State::TURBO) &&
-		App->input->GetKey(SDL_SCANCODE_S) != KEY_REPEAT)
+	if (!drag)
 	{
-		velocity = MAX_ACCELERATION * 3;
-		if (drag)
+		if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT &&
+			(vehicle->state != State::IN_AIR || vehicle->state == State::TURBO) &&
+			App->input->GetKey(SDL_SCANCODE_S) != KEY_REPEAT)
 		{
-			velocity /= 2;
+			velocity = MAX_ACCELERATION * 3;
+
+			vehicle->state = TURBO;
+			vehicle->vehicle->getRigidBody()->applyCentralForce({ 0,-99,0 });
 		}
-		vehicle->state = TURBO;
-		vehicle->vehicle->getRigidBody()->applyCentralForce({ 0,-99,0 });
-	}
-	else
-	{
-		velocity = MAX_ACCELERATION;
-		if (vehicle->state != State::IN_AIR)vehicle->state = State::IDLE;
+		else
+		{
+			velocity = MAX_ACCELERATION;
+			if (vehicle->state != State::IN_AIR)vehicle->state = State::IDLE;
+		}
+
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
@@ -332,17 +333,31 @@ update_status ModulePlayer::Update(float dt)
 			vehicle->body->applyTorque(forwardVector * 200);
 		}
 	}
-
+	if (drag)
+	{
+		acceleration = -MAX_ACCELERATION;
+		if (acceleration < 0) acceleration = 0;
+	}
 	vehicle->ApplyEngineForce(acceleration);
 	vehicle->Turn(turn);
 	vehicle->Brake(brake);
 
 	vehicle->Render();
 
+	char* title = "FuimRace";
+	if (lastCheckpoint == 4)
+	{
+		win = true;
+	}
+
+	App->window->SetTitle(title);
+	if (win)
+	{
+		sprintf(title, "YOU WIN!!¡!!1¡!!11¡!1!", 1);
+		App->window->SetTitle(title);
+	}
 	/*char title[80];
 	sprintf_s(title, "%.1f Km/h", vehicle->GetKmh());*/
-	const char* title = "FuimRace";
-	App->window->SetTitle(title);
 
 	return UPDATE_CONTINUE;
 }
@@ -374,6 +389,7 @@ void ModulePlayer::CheckPoints()
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN) Teleport(0);
 	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN) Teleport(1);
 	if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN) Teleport(2);
+	if (App->input->GetKey(SDL_SCANCODE_4) == KEY_DOWN) Teleport(3);
 }
 
 

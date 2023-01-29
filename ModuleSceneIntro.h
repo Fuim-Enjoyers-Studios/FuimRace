@@ -48,5 +48,8 @@ public:
 	int platOffset;
 
 	p2List<PhysBody3D*> checkPlat;
+	p2List<PhysBody3D*> checkIce;
+	p2List<PhysBody3D*> checkGrass;
+	p2List<PhysBody3D*> checkPlatf;
 	p2List<Cube*> checkpoints;
 };

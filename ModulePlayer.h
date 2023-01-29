@@ -37,6 +37,7 @@ public:
 	PhysBody3D* bodySensor;
 
 	bool drag, slippery;
+	bool win;
 
 private:
 

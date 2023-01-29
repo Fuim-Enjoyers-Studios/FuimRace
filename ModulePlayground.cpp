@@ -61,17 +61,17 @@ void ModulePlayground::CreatePlayground() {
 
 	CreateScenarioCube(vec3(23, 0.5f, 63.6f), vec3(20.5f, App->scene_intro->platOffset,134),45);
 
-	CreateScenarioCube(vec3(20, 0.5f, 220), vec3(45, App->scene_intro->platOffset, 155),90);
+	CreateScenarioCube(vec3(20, 0.5f, 240), vec3(190, App->scene_intro->platOffset, 0), 0, ColliderType::CHECKPOINT);
+
+	CreateScenarioCube(vec3(20, 0.5f, 220), vec3(45, App->scene_intro->platOffset, 155),90, ColliderType::CHECKPOINT);
 
 	CreateScenarioCube(vec3(23, 0.5f, 63.6f), vec3(169.5f, App->scene_intro->platOffset, 134), -45);
 
-	CreateScenarioCube(vec3(20, 0.5f, 240), vec3(190, App->scene_intro->platOffset, 0));
-
 	CreateScenarioCube(vec3(23, 0.5f, 63.6f), vec3(20.5f, App->scene_intro->platOffset, -134), -45);
 
-	CreateScenarioCube(vec3(20, 0.5f, 220), vec3(45, App->scene_intro->platOffset, -155), 90);
+	CreateScenarioCube(vec3(20, 0.5f, 220), vec3(45, App->scene_intro->platOffset, -155), 90, ColliderType::CHECKPOINT);
 
-	CreateScenarioCube(vec3(23, 0.5f, 63.6f), vec3(169.5f, App->scene_intro->platOffset, -134), 45);
+	CreateScenarioCube(vec3(23, 0.5f, 63.6f), vec3(169.5f, App->scene_intro->platOffset, -134), 45, ColliderType::CHECKPOINT);
 
 	//small lap
 	CreateScenarioCube(vec3(20, 0.5f, 240), vec3(-100, App->scene_intro->platOffset, 0), 0, ColliderType::GRASS, Color(0.52157, 0.87843, 0.52157));
@@ -115,11 +115,17 @@ void ModulePlayground::CreateScenarioCube(vec3 size, vec3 pos, float angle, Coll
 	if (ctype == ColliderType::ICE)
 	{
 		pbCube.getLast()->data->body->setFriction(-1.0f);
+		App->scene_intro->checkIce.add(PhysBody);
 	}
 
 	if (ctype == ColliderType::GRASS)
 	{
 		pbCube.getLast()->data->body->setFriction(5.0f);
+		App->scene_intro->checkGrass.add(PhysBody);
+	}
+	if (ctype == ColliderType::UNKNOWN)
+	{
+		App->scene_intro->checkPlatf.add(PhysBody);
 	}
 
 }
