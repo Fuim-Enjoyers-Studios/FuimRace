@@ -13,6 +13,8 @@ enum class ColliderType
 	DEATH,
 	WIN,
 	CHECKPOINT,
+	ICE,
+	GRASS,
 	UNKNOWN
 };
 

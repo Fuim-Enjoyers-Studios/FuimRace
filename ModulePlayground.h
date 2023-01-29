@@ -27,6 +27,8 @@ public:
 	p2List<Cylinder> scenaryCylinders;
 	p2List<Sphere> scenarySpheres;
 
+	p2List<PhysBody3D*> pbCube;
+
 	
 	
 };

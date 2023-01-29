@@ -82,6 +82,7 @@ void ModulePlayground::CreateScenarioCube(vec3 size, vec3 pos, float angle, Colo
 	cube->SetRotation(angle, vec3(0, 1, 0));
 
 	PhysBody3D* PhysBody = App->physics->AddBody(*cube, 0);
+	pbCube.add(PhysBody);
 	PhysBody->SetPos(pos.x, pos.y, pos.z);
 	PhysBody->ctype = ctype;	
 	if (sensor) {
@@ -97,6 +98,14 @@ void ModulePlayground::CreateScenarioCube(vec3 size, vec3 pos, float angle, Colo
 		App->scene_intro->checkPlat.add(PhysBody);
 	}
 
-	
+	if (ctype == ColliderType::ICE)
+	{
+		pbCube.getLast()->data->body->setFriction(-1.0f);
+	}
+
+	if (ctype == ColliderType::GRASS)
+	{
+		pbCube.getLast()->data->body->setFriction(5.0f);
+	}
 
 }
