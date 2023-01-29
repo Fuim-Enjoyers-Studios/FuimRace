@@ -160,6 +160,8 @@ bool ModulePlayer::Start()
 	vehicle->SetPos(cam.x, cam.y, cam.z);
 
 	lastCheckpoint = 0;
+	slippery = false;
+	drag = false;
 	
 	return true;
 }
@@ -243,6 +245,10 @@ update_status ModulePlayer::Update(float dt)
 		App->input->GetKey(SDL_SCANCODE_S) != KEY_REPEAT)
 	{
 		velocity = MAX_ACCELERATION * 3;
+		if (drag)
+		{
+			velocity /= 2;
+		}
 		vehicle->state = TURBO;
 		vehicle->vehicle->getRigidBody()->applyCentralForce({ 0,-99,0 });
 	}
@@ -271,24 +277,28 @@ update_status ModulePlayer::Update(float dt)
 
 	}
 
-	
 
-	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+	if (!slippery)
 	{
-		if (vehicle->state != State::TURBO && vehicle->state != State::IN_AIR)vehicle->state = State::WALK;
-		if (vehicle->vehicle->getCurrentSpeedKmHour() > +2.25)
+		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 		{
-			brake = BRAKE_POWER / 1.5f;
-			color.Set(1.0f, 0.0f, 0.0f, 1.0f);
-			vehicle->vehicle->getRigidBody()->applyCentralForce({ 0,-50,0 });
+			if (vehicle->state != State::TURBO && vehicle->state != State::IN_AIR)vehicle->state = State::WALK;
+			if (vehicle->vehicle->getCurrentSpeedKmHour() > +2.25)
+			{
+				brake = BRAKE_POWER / 1.5f;
+				color.Set(1.0f, 0.0f, 0.0f, 1.0f);
+				vehicle->vehicle->getRigidBody()->applyCentralForce({ 0,-50,0 });
 
-		}
-		else
-		{
-			acceleration = velocity * -1;
-			vehicle->body->applyTorque(perpendicularVector * 80);
+			}
+			else
+			{
+				acceleration = velocity * -1;
+				vehicle->body->applyTorque(perpendicularVector * 80);
+			}
 		}
 	}
+
+	
 
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 	{

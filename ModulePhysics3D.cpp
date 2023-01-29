@@ -107,12 +107,18 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 					if (!(pbodyA == sensorV && pbodyB == vehicle) && !(pbodyA == vehicle && pbodyB == sensorV))
 					{
 						if (App->player->vehicle->state == State::IN_AIR)App->player->vehicle->state = State::IDLE;
+
 					}
 				}
 				else
 				{
 					App->player->vehicle->state = State::IN_AIR;
 
+				}
+
+				if ((pbodyA->ctype == ColliderType::ICE && pbodyB->ctype == ColliderType::PLAYER) || (pbodyA->ctype == ColliderType::PLAYER && pbodyB->ctype == ColliderType::ICE))
+				{
+					App->player->slippery = true;
 				}
 
 

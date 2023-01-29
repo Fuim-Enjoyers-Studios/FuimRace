@@ -35,6 +35,8 @@ public:
 	Cube cubeSensor;
 	PhysBody3D* bodySensor;
 
+	bool drag, slippery;
+
 private:
 
 	btVector3 forwardVector;

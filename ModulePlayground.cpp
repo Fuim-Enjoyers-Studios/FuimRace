@@ -56,7 +56,8 @@ void ModulePlayground::CreatePlayground() {
 	Color Dirt(0.4, 0.2, 0.0);
 
 	//big lap
-	CreateScenarioCube(vec3(20, 0.5f, 240), vec3(0, App->scene_intro->platOffset, 0), 0,ColliderType::ICE, Color(0, 0, 255, 0));
+	CreateScenarioCube(vec3(20, 0.5f, 240), vec3(0, App->scene_intro->platOffset, 0), 0,ColliderType::ICE, Color(0.30196, 0.72157, 1.00000, 0));
+	//CreateScenarioCube(vec3(20, 0.5f, 240), vec3(0, App->scene_intro->platOffset + 0.01f, 0), 0, ColliderType::ICE, Color(0, 0, 255, 0), true);
 
 	CreateScenarioCube(vec3(23, 0.5f, 63.6f), vec3(20.5f, App->scene_intro->platOffset,134),45);
 
@@ -73,7 +74,7 @@ void ModulePlayground::CreatePlayground() {
 	CreateScenarioCube(vec3(23, 0.5f, 63.6f), vec3(169.5f, App->scene_intro->platOffset, -134), 45);
 
 	//small lap
-	CreateScenarioCube(vec3(20, 0.5f, 240), vec3(-100, App->scene_intro->platOffset, 0), 0);
+	CreateScenarioCube(vec3(20, 0.5f, 240), vec3(-100, App->scene_intro->platOffset, 0), 0, ColliderType::GRASS, Color(0.52157, 0.87843, 0.52157));
 
 	CreateScenarioCube(vec3(23, 0.5f, 63.6f), vec3(-79.5f, App->scene_intro->platOffset, 134), 45);
 

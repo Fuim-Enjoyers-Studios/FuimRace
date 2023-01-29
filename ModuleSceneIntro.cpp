@@ -44,12 +44,6 @@ bool ModuleSceneIntro::CleanUp()
 // Update
 update_status ModuleSceneIntro::Update(float dt)
 {
-	Plane p(0, 1, 0, 0);
-	p.axis = true;
-	p.Render();
-
-
-
 
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)App->SetDebug();
 
@@ -68,8 +62,35 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 				App->player->lastCheckpoint = i;
 		}
 		break;
+	case ColliderType::ICE:
+		LOG("Collision ICE");
+		if (body1->ctype == ColliderType::PLAYER)
+		{
+			App->player->slippery = true;
+		}
+		break;
+	case ColliderType::GRASS:
+		LOG("Collision GRASS");
+		if (body1->ctype == ColliderType::PLAYER)
+		{
+			App->player->drag = true;
+		}
+		break;
+	case ColliderType::PLATFORM:
+		LOG("Collision PLATFORM");
+		if (body1->ctype == ColliderType::PLAYER)
+		{
+			App->player->slippery = false;
+			App->player->drag = false;
+		}
+		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
+		if (body2->ctype == ColliderType::PLAYER)
+		{
+			App->player->slippery = false;
+			App->player->drag = false;
+		}
 		break;
 	}
 
@@ -85,8 +106,35 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 				App->player->lastCheckpoint = i;
 		}
 		break;
+	case ColliderType::ICE:
+		LOG("Collision ICE");
+		if (body2->ctype == ColliderType::PLAYER)
+		{
+			App->player->slippery = true;
+		}
+		break;
+	case ColliderType::GRASS:
+		LOG("Collision GRASS");
+		if (body2->ctype == ColliderType::PLAYER)
+		{
+			App->player->drag = true;
+		}
+		break;
+	case ColliderType::PLATFORM:
+		LOG("Collision PLATFORM");
+		if (body2->ctype == ColliderType::PLAYER)
+		{
+			App->player->slippery = false;
+			App->player->drag = false;
+		}
+		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
+		if (body2->ctype == ColliderType::PLAYER)
+		{
+			App->player->slippery = false;
+			App->player->drag = false;
+		}
 		break;
 	}
 }
